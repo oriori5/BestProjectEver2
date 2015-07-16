@@ -15,6 +15,7 @@
 #include "Utils/Location.h"
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
@@ -36,6 +37,8 @@ public:
 	void ConvertMapToGrid();
 	static int GetGridIndexByMapIndex(int map_index);
 	static void WriteMapMatrixToPng(int**& map_matrix, int height, int width, const char* filename);
+	static int LocationInCmToMapCell(float nLocation);
+	int GetMapCellByRealLocation(float x, float y);
 };
 
 #endif /* MAP_H_ */

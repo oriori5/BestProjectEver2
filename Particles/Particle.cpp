@@ -44,27 +44,27 @@ double Particle::calcScan(LaserProxy* _lp, Map& mp)
 
 		if (_lp->GetRange(i) > 0.75) // 75 cm - laser min range / 100
 		{
-			/*for (double j = 0; j <= _lp->GetRange(i); j += (1/mp.getCell2Cm()) ) ///TODO:ori - map?
+			for (double j = 0; j <= _lp->GetRange(i); j += (1/Map::map_resolution_in_cm) )
 			{
 				double currX = ext_loc.getX() + (j * 100 *  cos(releventAngle));
 				double currY = ext_loc.getY() + (j * 100 *  sin(releventAngle));
 
-				if (mp.getCellAtRealLocation(currX / 100.0f,currY / 100.0f) == 0)
+				if (mp.GetMapCellByRealLocation(currX / 100.0f,currY / 100.0f) == 0)
 					good_calls ++;
 				else
 					bad_calls ++;
 
-			}*/
+			}
 		}
 		else
 		{
 			double currX = ext_loc.getX() + cos(releventAngle);
 			double currY = ext_loc.getY() + sin(releventAngle);
 
-			/*if (mp.getCellAtRealLocation(currX / 100.0f,currY / 100.0f) == 1) TODO:ori - map?
+			if (mp.GetMapCellByRealLocation(currX / 100.0f,currY / 100.0f) == 1)
 				good_calls ++;
 			else
-				bad_calls ++;*/
+				bad_calls ++;
 		}
 	}
 

@@ -227,3 +227,27 @@ void Map::WriteMapMatrixToPng(int**& map_matrix, int height, int width, const ch
 	encodeOneStep(filename, navImage, width, height);
 }
 
+int Map::LocationInCmToMapCell(float nLocation)
+{
+	if (nLocation == 0)
+	{
+		// If the location is zero so the map cell is also zero
+		return (0);
+	}
+	else
+	{
+		// If the location is not zero, we calculate it
+		return (ceil(nLocation / Map::map_resolution_in_cm) - 1);
+	}
+}
+
+int Map::GetMapCellByRealLocation(float x, float y)
+{
+	int x_cell = Map::LocationInCmToMapCell(x);
+	int y_cell = Map::LocationInCmToMapCell(y);
+
+	return (_map._matrix[y_cell][x_cell]);
+}
+
+
+
