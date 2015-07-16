@@ -8,6 +8,7 @@
 #ifndef ROBOT_H_
 #define ROBOT_H_
 #include <libplayerc++/playerc++.h>
+#include "Particles/Localization.h"
 
 
 using namespace PlayerCc;
@@ -17,6 +18,7 @@ class Robot
 	PlayerClient* _pc;
 	Position2dProxy* _pp;
 	LaserProxy* _lp;
+	Localization* lc;
 public:
 	Robot(char* ip, int port);
 	void read();
@@ -26,6 +28,11 @@ public:
 	double GetCurentYaw();
 	double getXPos();
 	double getYPos();
+	Location getCurrentLocation();
+	float getYaw();
+	void Update();
+
+
 	virtual ~Robot();
 };
 

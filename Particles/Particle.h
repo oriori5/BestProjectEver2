@@ -8,33 +8,33 @@
 #ifndef PARTICLE_H_
 #define PARTICLE_H_
 #include <vector>
-#include "../Robot.h"
+#include <math.h>
 #include "../Utils/ExtendedLocation.h"
 #include "../Map.h"
+#include <libplayerc++/playerc++.h>
 
+using namespace PlayerCc;
 using namespace std;
 
 class Particle
 {
 private:
-
 	float belief;
+	ExtendedLocation ext_loc;
 
 public:
-	ExtendedLocation ext_loc;
 	vector<Particle> ChildParticles();
 	Particle(float x, float y, float yaw, float belife);
 	float getBelief();
 	void setBelief(float belief);
-	void Update(int x, int y, float yaw, LaserProxy* _lp, Map& mp);
+	void Update(int x, int y, float yaw, LaserProxy* laser_proxy, Map& mp);
 	double calcMove(int x, int y, float yaw);
-	double calcScan( LaserProxy* _lp, Map& mp);
+	double calcScan(LaserProxy* laser_proxy, Map& mp);
 	ExtendedLocation GetExtendedLocation();
 	void SetExtendedLocation(ExtendedLocation ext);
 	double Lasertord(int i);
 	bool isInRange(double value, double min, double max);
 	virtual ~Particle();
-
 
 };
 

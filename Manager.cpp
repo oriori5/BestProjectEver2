@@ -16,18 +16,21 @@ Manager::Manager(Robot* robot, Plan* pln)
 void Manager::run()
 {
 	_robot->read();
-	if(!(_curr->startCond()))
+	_robot->Update();
+	/*if(!(_curr->startCond()))
 		return;
-	_curr->action();
+	_curr->action();*/
 	while(_curr !=NULL)
 	{
 		while(_curr->stopCond() == false)
 		{
 			_curr->action();
 			_robot->read();
+			_robot->Update();
 		}
 		_curr = _curr->selectNext();
 		_robot->read();
+		_robot->Update();
 	}
 }
 

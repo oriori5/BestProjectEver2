@@ -53,6 +53,26 @@ double Robot::GetCurentYaw()
 	return _pp->GetYaw();
 }
 
+Location Robot::getCurrentLocation()
+{
+	Location a(lc->getEstimatedLocation().GetLocation().getX() / 100,lc->getEstimatedLocation().GetLocation().getY() / 100);
+	return (a);
+}
+
+float Robot::getYaw()
+{
+	//return _pp->GetYaw();
+	return (lc->getEstimatedLocation().getYaw());
+	//return loc_manager->getEstimatedLocation().getYaw();
+}
+
+void Robot::Update()
+{
+	lc->UpdateParticles();
+	Location meters_robot_loc = getCurrentLocation();
+	//cout << "current robot location meters (" << meters_robot_loc.getX() << "," << meters_robot_loc.getY() << "," << getYaw() * 180.0 / M_PI << ")" << endl;
+}
+
 
 Robot::~Robot()
 {
