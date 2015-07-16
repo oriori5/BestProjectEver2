@@ -24,7 +24,6 @@ public:
 	ExtendedLocation ext_loc;
 	vector<Particle> ChildParticles();
 	Particle(float x, float y, float yaw, float belife);
-	ExtendedLocation GetExtented();
 	float getBelief();
 	void setBelief(float belief);
 	void Update(int x, int y, float yaw, LaserProxy* _lp, Map& mp);
@@ -35,6 +34,8 @@ public:
 	double Lasertord(int i);
 	bool isInRange(double value, double min, double max);
 	virtual ~Particle();
+
+
 };
 
 #endif /* PARTICLE_H_ */

@@ -113,8 +113,18 @@ vector<Particle> Particle::ChildParticles()
 	return children;
 }
 
+
 void Particle::setBelief(float belief)
 {
 	this->belief = belief;
 }
 
+float Particle::getBelief()
+{
+	return this->belief;
+}
+
+ExtendedLocation Particle::GetExtendedLocation()
+{
+	return this->ext_loc;
+}
