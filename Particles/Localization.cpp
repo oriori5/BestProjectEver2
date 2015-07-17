@@ -53,6 +53,8 @@ void Localization::UpdateParticles()
 	double y = robot_location_in_meters.getY() * 100 - privious_location.getY();
 	double yaw = pos_proxy->GetYaw() - privious_location.getYaw();
 
+	unsigned int particle_count = 0;
+
 	privious_location.SetLocation(robot_location_in_meters.getX() * 100, robot_location_in_meters.getY() * 100);
 	privious_location.setYaw(pos_proxy->GetYaw());
 	//cout << "oudometry location (" << meters_robot_loc.getX() << "," << meters_robot_loc.getY() << "," << last_location.getYaw() * 180.0 / M_PI << ")" << endl;
@@ -60,7 +62,7 @@ void Localization::UpdateParticles()
 	vector<Particle> FuterParticalsVector = vector<Particle>();
 
 	vector<Particle>::iterator particale = particles_vector.begin();
-	while (particale != particles_vector.end())
+	while (particale != particles_vector.end() && particle_count < 100)
 	{
 		// Update the particle
 		particale->Update(x, y, yaw,laser_proxy,grid_map);
@@ -81,6 +83,7 @@ void Localization::UpdateParticles()
 				FuterParticalsVector.insert(FuterParticalsVector.end(),childParticles.begin(),childParticles.end());
 			}
 			particale++;
+			particle_count++;
 		}
 	}
 
@@ -100,28 +103,39 @@ void Localization::UpdateParticles()
 
 void Localization::InitializeRandomParticles()
 {
-	//srand (time(NULL));
+	srand (time(NULL));
 	unsigned particle_count = 0;
 
 	cout << "About to generate particles around (" << privious_location.getX() << "," << privious_location.getY() << ")" << endl;
 
-	while(particle_count < 150)
+	while(particle_count < 100)
 	{
-		int rand_x = rand() % 10 + (privious_location.getX() - 1); // 0.25 meter radius
-		int rand_y = rand() % 10 + (privious_location.getY() - 1); // 0.15 meter radius
+		int rand_x = rand() % 15 + (privious_location.getX() - 1); // 0.25 meter radius
+		int rand_y = rand() % 15 + (privious_location.getY() - 1); // 0.15 meter radius
+
+		if (rand_x < 0)
+		{
+			rand_x = -rand_x;
+		}
+
+		if(rand_y < 0)
+		{
+			rand_y = -rand_y;
+		}
 
 		//float rand_yaw = rand() % 360 + 1;
-		float rand_yaw = rand() % 10 + (privious_location.getYaw() * 180.0 / M_PI) - 1;
+		float rand_yaw = rand() % 2 + (privious_location.getYaw() * 180.0 / M_PI) - 1;
 		rand_yaw = fmod(rand_yaw, 360.0);
 		rand_yaw *= M_PI / 180.0;
 
-		/*if (grid_map.getCellAtRealLocation(rand_x / 100.0f, rand_y / 100.0f) != 1) // TODO:ori - map?
+		if (grid_map.GetMapCellByRealLocation(rand_x / 100.0f, rand_y / 100.0f) != 1)
 		{
 			Particle p =  Particle(rand_x, rand_y, rand_yaw, 1.0);
 			particles_vector.push_back(p);
 			particle_count++;
-		}*/
+		}
 	}
+	cout << "Finish to generate particles around (" << privious_location.getX() << "," << privious_location.getY() << ")" << endl;
 }
 
 Localization::~Localization()

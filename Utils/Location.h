@@ -36,6 +36,16 @@ public:
 		return (_y);
 	}
 
+	void setX(int x)
+	{
+		_x = x;
+	}
+
+	void setY(int y)
+	{
+		_y = y;
+	}
+
 };
 
 #endif /* LOCATION_H_ */

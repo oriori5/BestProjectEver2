@@ -9,6 +9,7 @@
 #define ROBOT_H_
 #include <libplayerc++/playerc++.h>
 #include "Particles/Localization.h"
+#include "Map.h"
 
 
 using namespace PlayerCc;
@@ -18,13 +19,20 @@ class Robot
 	PlayerClient* _pc;
 	Position2dProxy* _pp;
 	LaserProxy* _lp;
-	Localization* lc;
+	Localization* _lc;
+	Map _map;
 public:
-	Robot(char* ip, int port);
+	Robot(char* ip, int port, Map _map);
 	void read();
 	void setSpeed(float speed, float angularSpeed);
 	void setSpeed(double xSpeed, double ySpeed, double yaw);
 	double getLaserDistance(int index);
+	bool isObstacle(bool* blocked_right);
+	bool isRightSideClear();
+	bool isLeftSideClear();
+	bool isClosetToLocation(Location location);
+	void setTargetLocation(Location target);
+	Location getTargetLocation();
 	double GetCurentYaw();
 	double getXPos();
 	double getYPos();

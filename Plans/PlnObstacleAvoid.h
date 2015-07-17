@@ -10,19 +10,16 @@
 
 #include "../Behaviors/Behavior.h"
 #include "Plan.h"
-#include "../Behaviors/A.h"
-#include "../Behaviors/B.h"
-#include "../Behaviors/C.h"
+#include "../WayPointManager.h"
 
 class PlnObstacleAvoid : public Plan
 {
-	Behavior* _beh[3];
-	Behavior* _start;
+	Behavior* _beh[4];
 
-public:
+	public:
 	PlnObstacleAvoid(Robot* robot);
-	Behavior* getStartPoint(){return _start;}
+	PlnObstacleAvoid(Robot* robot, WayPointManager* wpManager);
+	Behavior* getStartPoint();
 	virtual ~PlnObstacleAvoid();
-};
 
 #endif /* PLNOBSTACLEAVOID_H_ */

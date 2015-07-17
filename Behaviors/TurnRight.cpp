@@ -20,16 +20,12 @@ bool TurnRight::startCond()
 	return false;
 }
 
-ActionResult TurnRight::action()
+void TurnRight::action()
 {
 	float angularSpeed = -0.5;
 	double dYaw = 0;
 
 	_robot->setSpeed(0.0,angularSpeed);
-
-	ActionResult result(0,dYaw);
-
-	return result;
 }
 
 bool TurnRight::stopCond()

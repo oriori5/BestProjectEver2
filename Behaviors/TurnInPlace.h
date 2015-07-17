@@ -16,7 +16,7 @@ public:
 	TurnInPlace(Robot* robot);
 	bool startCond();
 	bool stopCond();
-	ActionResult action();
+	void action();
 	virtual ~TurnInPlace();
 };
 

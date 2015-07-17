@@ -8,12 +8,27 @@
 
 Behavior::Behavior(Robot* robot)
 {
-	_next = NULL;
-	_arrSize = 0;
 	_robot = robot;
 }
 
-Behavior* Behavior::addNext(Behavior* beh)
+bool Behavior::isFree(int startIndex, int endIndex, double distance)
+{
+	bool free = true;
+	for(int index = startIndex; index<=endIndex; index++)
+	{
+		float dist = _robot->getLaserDistance(index);
+
+		if(dist < distance)
+		{
+			free = false;
+			break;
+		}
+	}
+
+	return free;
+}
+
+/*Behavior* Behavior::addNext(Behavior* beh)
 {
 	int i;
 	Behavior** tmp = new Behavior*[_arrSize+1];
@@ -53,10 +68,10 @@ bool Behavior::isFree(int startIndex, int endIndex, double distance)
 	}
 	return free;
 }
-
+*/
 Behavior::~Behavior()
 {
-	delete [] _next;
+	//delete [] _next;
 }
 
 

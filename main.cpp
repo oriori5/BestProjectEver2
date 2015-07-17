@@ -27,8 +27,7 @@ int main()
 	cout << "the p was read are:" << endl;
 	WayPointManager WayPointManager(_resultPath,mapObject,ParametersStruct);
 
-
-	Robot robot("localhost",6665);
+	Robot robot("localhost",6665, mapObject);
 	PlnObstacleAvoid plnOA(&robot);
 	Manager manager(&robot, &plnOA);
 	manager.run();

@@ -12,12 +12,13 @@
 #include "../Robot.h"
 #include "../Plans/Resources.h"
 
-class GoForward: public Behavior {
+class GoForward: public Behavior
+{
 public:
 	GoForward(Robot* robot);
 	bool startCond();
 	bool stopCond();
-	ActionResult action();
+	void action();
 	virtual ~GoForward();
 };
 

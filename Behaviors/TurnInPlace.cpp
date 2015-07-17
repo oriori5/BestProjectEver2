@@ -20,7 +20,7 @@ bool TurnInPlace::startCond()
 	return true;
 }
 
-ActionResult TurnInPlace::action()
+void TurnInPlace::action()
 {
 	//cout<<"TurnInPlace Action"<<endl;
 

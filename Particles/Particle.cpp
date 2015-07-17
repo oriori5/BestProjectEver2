@@ -49,6 +49,16 @@ double Particle::calcScan(LaserProxy* _lp, Map& mp)
 				double currX = ext_loc.getX() + (j * 100 *  cos(releventAngle));
 				double currY = ext_loc.getY() + (j * 100 *  sin(releventAngle));
 
+				if (currX < 0)
+				{
+					currX = -currX;
+				}
+
+				if (currY < 0)
+				{
+					currY = -currY;
+				}
+
 				if (mp.GetMapCellByRealLocation(currX / 100.0f,currY / 100.0f) == 0)
 					good_calls ++;
 				else

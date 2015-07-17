@@ -32,7 +32,8 @@ Location ExtendedLocation::GetLocation()
 
 void ExtendedLocation::SetLocation(int x, int y)
 {
-	Location(x, y);
+	this -> setX(x);
+	this -> setY(y);
 }
 
 float ExtendedLocation::getYaw()

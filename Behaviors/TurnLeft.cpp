@@ -19,17 +19,12 @@ bool TurnLeft::startCond()
 	return false;
 }
 
-ActionResult TurnLeft::action()
+void TurnLeft::action()
 {
 	float angularSpeed = 0.5;
 
 	//cout<<"Left Action"<<endl;
 	_robot->setSpeed(0.0,angularSpeed);
-
-	ActionResult result(0,7);
-
-	return result;
-
 }
 
 bool TurnLeft::stopCond()
