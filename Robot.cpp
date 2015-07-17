@@ -16,6 +16,9 @@ Robot::Robot(char* ip, int port, Map map)
 
 	_lc = new Localization(*_pp, _lp, map);
 
+	get_call = false;
+	get_call_left = false;
+
 	_pp->SetMotorEnable(true);
 	int i;
 
@@ -76,51 +79,51 @@ void Robot::Update()
 }
 
 bool Robot::isObstacle(bool* blocked_right)
-
-	// Check if blocked from the right.
+{
+// Check if blocked from the right.
 	if (!isRightSideClear())
 	{
 		// if still blocked but turning side was decided - keep it.
-		if (!decision_made)
+		if (!get_call)
 		{
-			decided_direction_is_left = true;
+			get_call_left = true;
 
 			//_pp.SetSpeed(0.0, -0.3);
-			decision_made = true;
+			get_call = true;
 		}
 	}
 	// Check if blocked from the left or front.
-	else if (!left_flank_clear() || (*_lp)[forward] < 0.4f)
+	else if (!isLeftSideClear() || (*_lp)[333] < 0.4f)
 	{
-		if (!decision_made)
+		if (!get_call)
 		{
-			decided_direction_is_left = false;
+			get_call_left = false;
 			//_pp.SetSpeed(0.0, 0.3);
-			decision_made = true;
+			get_call = true;
 		}
 	}
 	// if not blocked from both sides - reset desition.
 	else
 	{
 		//pp.SetSpeed(1.0,0);
-		decision_made = false;
+		get_call = false;
 	}
 
-	*is_blocked_from_right = decided_direction_is_left;
+	*blocked_right = get_call_left;
 
-	if (decision_made)
+	if (get_call)
 	{
 		cout << "BLOCKED BLOCKED BLOCKED" << endl;
 	}
 
-	return decision_made;
+	return get_call;
 }
 
 bool Robot::isRightSideClear()
 {
 
 	double min_distance = 1000;
-	for(int i = forward; i < 566; i+= 5)
+	for(int i = 333; i < 566; i+= 5)
 	{
 		min_distance = MIN(min_distance, (*_lp)[i]);
 		// If the obstacle is near the front, stay further away.
@@ -132,13 +135,14 @@ bool Robot::isRightSideClear()
 	}
 
 	cout << "min obstacle distance right : " << min_distance << endl;
+
 	return true;
 }
 
 bool Robot::isLeftSideClear()
 {
 	double min_distance = 1000;
-	for(int i = 100; i < forward; i+= 5)
+	for(int i = 100; i < 333; i+= 5)
 	{
 		min_distance = MIN(min_distance, (*_lp)[i]);
 		// If the obstacle is near the front, stay further away.
@@ -155,7 +159,7 @@ bool Robot::isLeftSideClear()
 
 bool Robot::isClosetToLocation(Location location)
 {
-    float distance = getCurrentLocation().Distance(loc);
+    float distance = getCurrentLocation().Distance(location);
 
 	if (distance < 1.0f) // TODO : check what does "near" mean in numbers...
 	{
@@ -167,12 +171,12 @@ bool Robot::isClosetToLocation(Location location)
 
 void Robot::setTargetLocation(Location target)
 {
-	this->target_location = target;
+	this->_target = target;
 }
 
 Location Robot::getTargetLocation()
 {
-	return this->target_location;
+	return this->_target;
 }
 
 

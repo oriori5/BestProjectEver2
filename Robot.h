@@ -21,6 +21,11 @@ class Robot
 	LaserProxy* _lp;
 	Localization* _lc;
 	Map _map;
+	bool get_call;
+	bool get_call_left;
+	Location _target;
+
+
 public:
 	Robot(char* ip, int port, Map _map);
 	void read();

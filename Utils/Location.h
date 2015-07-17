@@ -9,6 +9,7 @@
 #define LOCATION_H_
 
 #include "../Consts.h"
+#include <math.h>
 
 class Location
 {
@@ -25,6 +26,17 @@ public:
 	Location();
 	virtual ~Location();
 	Location getRelativePosition(Directions direction);
+
+	inline float Magnitude(Location& v)
+	{
+		return(sqrtf((v.getX() * v.getX()) + (v.getY() * v.getY())));
+
+	}
+
+	inline float Distance(Location& v)
+	{
+		return(sqrtf((v.getX() - getX()) * v.getX() - getX()) +( (v.getY() - getY()) * (v.getY() - getY())));
+	}
 
 	int getX()
 	{
@@ -44,6 +56,29 @@ public:
 	void setY(int y)
 	{
 		_y = y;
+	}
+
+	Location operator -(const Location& v) const
+	{
+	    return (Location(_x - v._x, _y - v._y));
+	}
+
+	Location operator /(float t) const
+	{
+		   return (Location(_x / t, _y / t));
+	}
+
+	Location& operator /=(float t)
+	{
+	    float f = 1.0F / t;
+	    _x *= f;
+	    _y *= f;
+	    return (*this);
+	}
+
+	Location& Normalize(void)
+	{
+	    return (*this /= sqrtf(_x * _x + _y * _y));
 	}
 
 };
