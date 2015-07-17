@@ -28,7 +28,7 @@ int main()
 	WayPointManager WayPointManager(_resultPath,mapObject,ParametersStruct);
 
 	Robot robot("localhost",6665, mapObject);
-	PlanGoToTarget plnToTarget(&robot);
+	PlanGoToTarget plnToTarget(&robot, &WayPointManager);
 	Manager manager(&robot, &plnToTarget);
 	manager.run();
 

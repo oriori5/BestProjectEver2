@@ -49,6 +49,7 @@ public:
 	 */
 	WayPoint getCurrnetWayPoint()
 	{
+		cout << "current way point = " << endl;
 		return _wayPoints[_currentWayPoint];
 	}
 
