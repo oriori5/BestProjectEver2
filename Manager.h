@@ -9,8 +9,8 @@
 #define MANAGER_H_
 
 #include "Behaviors/Behavior.h"
-#include "Plans/PlnObstacleAvoid.h"
 #include "Robot.h"
+#include "Plans/Plan.h"
 
 class Manager
 {

@@ -1,7 +1,6 @@
 
 #include "Robot.h"
 #include "Manager.h"
-#include "Plans/PlnObstacleAvoid.h"
 #include "Manager/MapHandler.h"
 #include "WayPointManager.h"
 #include "Map.h"
@@ -9,6 +8,7 @@
 #include "PathFinder.h"
 #include "Utils/Location.h"
 #include "Manager/CofigurationManager.h"
+#include "Plans/PlanGoToTarget.h"
 
 #include <fstream>
 
@@ -28,8 +28,8 @@ int main()
 	WayPointManager WayPointManager(_resultPath,mapObject,ParametersStruct);
 
 	Robot robot("localhost",6665, mapObject);
-	PlnObstacleAvoid plnOA(&robot);
-	Manager manager(&robot, &plnOA);
+	PlanGoToTarget plnToTarget(&robot);
+	Manager manager(&robot, &plnToTarget);
 	manager.run();
 
 
