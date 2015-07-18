@@ -12,12 +12,10 @@ double Map::grid_resolution_in_cm = 0;
 
 Map::Map()
 {
-	// TODO Auto-generated constructor stub
 }
 
 Map::~Map()
 {
-	// TODO Auto-generated destructor stub
 }
 
 void Map::ReadMapFromPngToMatrix(const char* filename, int**& map_matrix, int& rows, int& cols)
@@ -196,22 +194,28 @@ void Map::WriteMapMatrixToPng(int**& map_matrix, int height, int width, const ch
 	navImage.resize(width * height * 4);
 	unsigned char color;
 
+	// Running over all the rows in the map
 	for (int row = 0; row < height; row++)
 	{
+		// Running over all the cols in the map
 		for (int col = 0; col < width; col++)
 		{
+			// If the current cell is empty we set WHITE color
 			if (map_matrix[row][col] == 0)
 			{
 				color = 255;
 			}
+			// If the current cell is occupied we set BLACK color
 			else if (map_matrix[row][col] == 1)
 			{
 				color = 0;
 			}
+			// If the current cell is blown we set WHITE color
 			else if (map_matrix[row][col] == 2)
 			{
 				color = 255;
 			}
+			// If the current cell is path we set GRAY color
 			else if (map_matrix[row][col] == 5)
 			{
 				color = 128;
@@ -224,6 +228,7 @@ void Map::WriteMapMatrixToPng(int**& map_matrix, int height, int width, const ch
 		}
 	}
 
+	// Write the data to png file
 	encodeOneStep(filename, navImage, width, height);
 }
 
@@ -243,9 +248,11 @@ int Map::LocationInCmToMapCell(float nLocation)
 
 int Map::GetMapCellByRealLocation(float x, float y)
 {
+	// Getting the indices of the cell
 	int x_cell = Map::LocationInCmToMapCell(x);
 	int y_cell = Map::LocationInCmToMapCell(y);
 
+	// Returning the requested cell content
 	return (_map._matrix[y_cell][x_cell]);
 }
 

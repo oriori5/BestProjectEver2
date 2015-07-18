@@ -23,24 +23,21 @@
 using namespace std;
 using namespace tr1;
 
-
 class AStarSearcher
 {
 public:
 	AStarSearcher();
 
-	//***********
-	//	Search methods
-	//***********
-	static void aStarSearch(MapHolderAStar mapGraph,
-			Location start, Location target,
-			LocationMatrix& parentsMap,
-			IntMatrix& costMap);
+	/*
+	 * Run the A-Star algorithm
+	 */
+	static void aStarSearch(MapHolderAStar mapGraph, Location start, Location target,
+							LocationMatrix& parentsMap, IntMatrix& costMap);
 
-	//***********
-	//	Algotihm's logic methods
-	//***********
-	static int heuristic(Location from, Location to);
+	/*
+	 * The heuristic method for the A-Star algorithm
+	 */
+	static int heuristic(Location source, Location dest);
 };
 
 #endif /* ASTARSEARCHER_H_ */

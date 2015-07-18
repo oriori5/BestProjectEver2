@@ -11,12 +11,10 @@ AStarSearcher::AStarSearcher()
 {
 }
 
-void AStarSearcher::aStarSearch(MapHolderAStar mapGraph,
-		Location start, Location target,
-		LocationMatrix& parentsMap,
-		IntMatrix& costMap)
+void AStarSearcher::aStarSearch(MapHolderAStar mapGraph, Location start, Location target,
+								LocationMatrix& parentsMap, IntMatrix& costMap)
 {
-	// Define the sizes of the matrixes
+	// Define the sizes of the matrices
 	parentsMap.DefineSize(mapGraph._mapObj._map._height, mapGraph._mapObj._map._width);
 	costMap.DefineSize(mapGraph._mapObj._map._height, mapGraph._mapObj._map._width);
 	costMap._defaultValue = 0;
@@ -32,14 +30,15 @@ void AStarSearcher::aStarSearch(MapHolderAStar mapGraph,
 	while (!frontier.empty())
 	{
 		Location current = frontier.get();
-		vector<Location> neighbors = mapGraph.neighbors(current);
+		vector<Location> neighbors = mapGraph.getNeighborsOfLocation(current);
 
 		// Run over all the neighbors of the current location
 		for (int i = 0; i < neighbors.size(); i++)
 		{
 			Location next = neighbors[i];
 
-			int newCost = costMap._matrix[current.getY()][current.getX()] + mapGraph.cost(current,next);
+			// Calculating the new cost of the path to the current neighbor
+			int newCost = costMap._matrix[current.getY()][current.getX()] + mapGraph.getCostOfPath(current,next);
 
 			// Checking if we didn't visit yet in the next node or the new cost is lower than the existing
 			// cost of the next node
@@ -56,18 +55,15 @@ void AStarSearcher::aStarSearch(MapHolderAStar mapGraph,
 		}
 	}
 
+	// Checking if we didn't reach the target
 	if (parentsMap.isPositionDefault(target))
 	{
-		cout << "Target wasn't reached" << endl;
+		cout << "Target wasn't reached :(" << endl;
 	}
 }
 
-int AStarSearcher::heuristic(Location from, Location to)
+int AStarSearcher::heuristic(Location source, Location dest)
 {
-	int fromX = from.getX();
-	int fromY = from.getY();
-	int toX = to.getX();
-	int toY = to.getY();
-
-	return abs(fromX - toX) + abs(fromY- toY);
+	// Return the heuristic calculate for the algorithm
+	return (abs(source.getX() - dest.getX()) + abs(source.getY() - dest.getY()));
 }
