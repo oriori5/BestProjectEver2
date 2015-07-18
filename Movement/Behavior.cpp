@@ -6,16 +6,21 @@
  */
 #include "Behavior.h"
 
+// Ctor
 Behavior::Behavior(Robot* robot)
 {
 	_robot = robot;
 }
 
+// Is the index is free?
 bool Behavior::isFree(int startIndex, int endIndex, double distance)
 {
 	bool free = true;
+
+	// All over the index
 	for(int index = startIndex; index<=endIndex; index++)
 	{
+		// Get the distance
 		float dist = _robot->getLaserDistance(index);
 
 		if(dist < distance)
@@ -28,50 +33,31 @@ bool Behavior::isFree(int startIndex, int endIndex, double distance)
 	return free;
 }
 
-/*Behavior* Behavior::addNext(Behavior* beh)
+// Add behaviors
+void Behavior::addNextBehavior(Behavior* next)
 {
-	int i;
-	Behavior** tmp = new Behavior*[_arrSize+1];
-	if(!tmp)
-		return NULL;
-	for(i=0;i<_arrSize;i++)
-		tmp[i] = _next[i];
-	tmp[i] = beh;
-	delete []_next;
-	_next=tmp;
-	_arrSize++;
+	_behaviorVector.push_back(next);
+}
+
+// Select next behavior
+Behavior* Behavior::selectNext()
+{
+	//Run over vector and return first true condition
+	for (int i=0; i < _behaviorVector.size(); i++)
+	{
+		if (_behaviorVector[i]->startCond())
+		{
+			return _behaviorVector[i];
+		}
+	}
+
 	return this;
 }
 
-Behavior* Behavior::selectNext()
-{
-	int i;
-	for(i=0;i<_arrSize;i++)
-		if(_next[i]->startCond())
-			return _next[i];
-
-	return NULL;
-}
-
-bool Behavior::isFree(int startIndex, int endIndex, double distance)
-{
-	bool free = true;
-	for(int index = startIndex; index<=endIndex; index++)
-	{
-		float dist = _robot->getLaserDistance(index);
-
-		if(dist < distance)
-		{
-			free = false;
-			break;
-		}
-	}
-	return free;
-}
-*/
+// Dtor
 Behavior::~Behavior()
 {
-	//delete [] _next;
+
 }
 
 

@@ -3,10 +3,12 @@
 #ifndef ACTIONRESULT_H_
 #define ACTIONRESULT_H_
 
-class ActionResult {
+class ActionResult
+{
 protected:
 	float _monment;
 	float _yawResult;
+
 public:
 	ActionResult();
 	ActionResult(float monment, float yaw);
