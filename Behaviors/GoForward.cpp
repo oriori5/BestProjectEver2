@@ -24,7 +24,7 @@ bool GoForward::startCond()
 
 void GoForward::action()
 {
-	_robot->setSpeed(0.3f,0.0f);
+	_robot->setSpeed(0.35f,0.0f);
 }
 
 bool GoForward::stopCond()
@@ -33,14 +33,18 @@ bool GoForward::stopCond()
 	cout << "Forward, current loc = (" << _robot->getCurrentLocation().getX() << "," << _robot->getCurrentLocation().getY() << ")" << endl;
 	cout << "Forward, target loc = (" << loc.getX() << "," << loc.getY() << ")" << endl;
 	cout << "Forward, distance from target: " << _robot->getCurrentLocation().Distance(loc) << endl;
-	if (_robot->getCurrentLocation().Distance(loc) < 40.0f)
+	if (_robot->getCurrentLocation().Distance(loc) < 30.0f)
 	{
+
+		cout << "Forward, becuade distance" << endl;
 		return (true);
+
 	}
 
 	if(!isFree(Resources::forwardStartIndex,Resources::forwardEndIndex,0.40))
 	{
-		return true;
+		cout << "Forward, becuade is not free" << endl;
+		return (true);
 	}
 
 	return false;

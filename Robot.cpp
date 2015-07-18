@@ -41,6 +41,7 @@ bool turnOnTheNoise = false;
 
 void Robot::read()
 {
+	//== 1
 	_pc->Read();
 
 }
