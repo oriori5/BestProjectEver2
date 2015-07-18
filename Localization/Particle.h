@@ -19,8 +19,8 @@ using namespace std;
 class Particle
 {
 private:
-	float belief;
-	ExtendedLocation ext_loc;
+	float _belief;
+	ExtendedLocation _extendedLocation;
 
 public:
 	vector<Particle> ChildParticles();
@@ -35,7 +35,6 @@ public:
 	double Lasertord(int i);
 	bool isInRange(double value, double min, double max);
 	virtual ~Particle();
-
 };
 
 #endif /* PARTICLE_H_ */

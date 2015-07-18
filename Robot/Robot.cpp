@@ -73,14 +73,14 @@ double Robot::GetCurentYaw()
 
 Location Robot::getCurrentLocation()
 {
-	Location a(_lc->getEstimatedLocation().GetLocation().getX(),_lc->getEstimatedLocation().GetLocation().getY());
+	Location a(_lc->getPredictedLocation().GetLocation().getX(),_lc->getPredictedLocation().GetLocation().getY());
 	//Location a(_lc->getEstimatedLocation().GetLocation().getX() / 100,_lc->getEstimatedLocation().GetLocation().getY() / 100);
 	return (a);
 }
 
 float Robot::getYaw()
 {
-	return (_lc->getEstimatedLocation().getYaw());
+	return (_lc->getPredictedLocation().getYaw());
 }
 
 void Robot::Update()
