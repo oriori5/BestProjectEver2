@@ -30,12 +30,12 @@ private:
 	vector<Particle> particles_vector;
 	Map grid_map;
 
-	void InitializeRandomParticles();
-	static bool getBestParticle(Particle first_particle, Particle second_particle);
+	void InitParticles();
+	static bool getSuccessParticle(Particle part1, Particle part2);
 public:
 	Localization();
 	Localization(Position2dProxy &position2dProxy, LaserProxy* laserProxy, Map& map);
-	ExtendedLocation getEstimatedLocation();
+	ExtendedLocation getPredictedLocation();
 	void UpdateParticles();
 	virtual ~Localization();
 };
