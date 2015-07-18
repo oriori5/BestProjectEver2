@@ -10,7 +10,7 @@
 #include <vector>
 #include <math.h>
 #include "../Utils/ExtendedLocation.h"
-#include "../Map.h"
+#include "../Map/Map.h"
 #include <libplayerc++/playerc++.h>
 
 using namespace PlayerCc;

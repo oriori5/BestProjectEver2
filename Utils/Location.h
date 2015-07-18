@@ -8,7 +8,7 @@
 #ifndef LOCATION_H_
 #define LOCATION_H_
 
-#include "../Consts.h"
+#include "Consts.h"
 #include <math.h>
 
 class Location

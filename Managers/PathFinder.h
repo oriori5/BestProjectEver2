@@ -3,10 +3,10 @@
 #define PATHFINDER_H_
 
 #include <limits>
-#include "IntMatrix.h"
-#include "LocationMatrix.h"
-#include "AStar/AStarSearcher.h"
-#include "AStar/MapHolderAStar.h"
+#include "../Utils/IntMatrix.h"
+#include "../Utils/LocationMatrix.h"
+#include "../AStar/AStarSearcher.h"
+#include "../AStar/MapHolderAStar.h"
 
 using namespace std;
 

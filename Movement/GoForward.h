@@ -9,8 +9,8 @@
 #define GOFORWARD_H_
 
 #include "Behavior.h"
-#include "../Robot.h"
-#include "../Plans/Resources.h"
+#include "../Robot/Robot.h"
+#include "../Utils/Resources.h"
 #include "../Utils/Location.h"
 
 class GoForward: public Behavior

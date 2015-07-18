@@ -8,9 +8,9 @@
 #ifndef MANAGER_H_
 #define MANAGER_H_
 
-#include "Behaviors/Behavior.h"
-#include "Robot.h"
-#include "Plans/Plan.h"
+#include "../Movement/Behavior.h"
+#include "../Robot/Robot.h"
+#include "../Movement/Plan.h"
 
 class Manager
 {

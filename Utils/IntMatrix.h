@@ -1,25 +1,25 @@
 /*
- * LocationMatrix.h
+ * Matrix.h
  *
  *  Created on: Jun 26, 2015
  *      Author: colman
  */
 
-#ifndef LOCATIONMATRIX_H_
-#define LOCATIONMATRIX_H_
+#ifndef INT_MATRIX_H_
+#define INT_MATRIX_H_
 
-#include "Utils/Location.h"
+#include "Location.h"
 
-class LocationMatrix
+class IntMatrix
 {
 public:
 	int _height;
 	int _width;
-	Location** _matrix;
-	Location _defaultValue;
+	int** _matrix;
+	int _defaultValue;
 
-	LocationMatrix();
-	virtual ~LocationMatrix();
+	IntMatrix();
+	virtual ~IntMatrix();
 
 	void DefineSize(int height, int width)
 	{
@@ -27,10 +27,10 @@ public:
 		_width = width;
 
 		// Initialize the matrix
-		_matrix = new Location*[_height];
+		_matrix = new int*[_height];
 		for (int row = 0; row < height; row++)
 		{
-			_matrix[row] = new Location[width];
+			_matrix[row] = new int[width];
 		}
 	};
 
@@ -38,4 +38,4 @@ public:
 	bool isPositionDefault(Location pos);
 };
 
-#endif /* LOCATIONMATRIX_H_ */
+#endif /* INT_MATRIX_H_ */

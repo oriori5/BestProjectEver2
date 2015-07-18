@@ -1,14 +1,14 @@
 
-#include "Robot.h"
-#include "Manager.h"
-#include "Manager/MapHandler.h"
-#include "WayPointManager.h"
-#include "Map.h"
-#include "Utils.h"
-#include "PathFinder.h"
+#include "Robot/Robot.h"
+#include "Managers/Manager.h"
+#include "Managers/MapHandler.h"
+#include "Managers/WayPointManager.h"
+#include "Map/Map.h"
+#include "Utils/Utils.h"
+#include "Managers/PathFinder.h"
 #include "Utils/Location.h"
-#include "Manager/CofigurationManager.h"
-#include "Plans/PlanGoToTarget.h"
+#include "Managers/CofigurationManager.h"
+#include "Movement/PlanGoToTarget.h"
 
 #include <fstream>
 

@@ -9,11 +9,11 @@
 #define PLANGOTOTARGET_H_
 
 #include "Plan.h"
-#include "../WayPointManager.h"
-#include "../Behaviors/GoForward.h"
-#include "../Behaviors/GoToWayPoint.h"
-#include "../Behaviors/GoRotate.h"
-#include "../Behaviors/GoObstacle.h"
+#include "../Managers/WayPointManager.h"
+#include "GoForward.h"
+#include "GoToWayPoint.h"
+#include "GoRotate.h"
+#include "GoObstacle.h"
 
 class PlanGoToTarget: public Plan
 {

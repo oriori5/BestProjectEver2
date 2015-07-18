@@ -13,11 +13,11 @@
 #include <queue>
 #include <stdio.h>      /* printf */
 #include <stdlib.h>     /* abs */
-#include "../Map.h"
+#include "../Map/Map.h"
 #include "MapHolderAStar.h"
 #include "../Utils/Location.h"
-#include "../IntMatrix.h"
-#include "../LocationMatrix.h"
+#include "../Utils/IntMatrix.h"
+#include "../Utils/LocationMatrix.h"
 #include "../Utils/PriorityQueue.h"
 
 using namespace std;

@@ -8,10 +8,10 @@
 #ifndef MAPHANDLER_H_
 #define MAPHANDLER_H_
 
-#include "../Map.h"
-#include "../PathFinder.h"
+#include "../Map/Map.h"
+#include "PathFinder.h"
 #include "../Utils/Location.h"
-#include "../Manager/CofigurationManager.h"
+#include "CofigurationManager.h"
 #include <math.h>
 using namespace std;
 

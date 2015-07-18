@@ -9,7 +9,7 @@
 #define GOTOWAYPOINT_H_
 
 #include "Behavior.h"
-#include "../WayPointManager.h"
+#include "../Managers/WayPointManager.h"
 
 class GoToWayPoint : public Behavior
 {

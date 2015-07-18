@@ -6,7 +6,7 @@
  */
 #ifndef BEHAVIOR_H_
 #define BEHAVIOR_H_
-#include "../Robot.h"
+#include "../Robot/Robot.h"
 //#include "../Helpers/MappingHelper.h"
 
 #include "ActionResult.h"

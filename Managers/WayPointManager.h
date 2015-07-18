@@ -11,11 +11,11 @@
 #include <vector>
 
 #include "WayPointManager.h"
-#include "Manager/CofigurationManager.h"
-#include "LocationMatrix.h"
-#include "Utils/Location.h"
-#include "Utils/WayPoint.h"
-#include "Map.h"
+#include "CofigurationManager.h"
+#include "../Utils/LocationMatrix.h"
+#include "../Utils/Location.h"
+#include "../Utils/WayPoint.h"
+#include "../Map/Map.h"
 #include <cmath>
 #include <iostream>
 

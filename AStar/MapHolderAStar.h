@@ -9,8 +9,8 @@
 #define MAPHOLDERASTAR_H_
 
 #include "../Utils/Location.h"
-#include "../Map.h"
-#include "../IntMatrix.h"
+#include "../Map/Map.h"
+#include "../Utils/IntMatrix.h"
 #include <vector>
 
 using namespace std;

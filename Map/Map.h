@@ -8,11 +8,11 @@
 #ifndef MAP_H_
 #define MAP_H_
 
-#include "PngUtils/lodepng.h"
-#include "PngUtils/pngUtil.h"
-#include "IntMatrix.h"
-#include "Consts.h"
-#include "Utils/Location.h"
+#include "lodepng.h"
+#include "pngUtil.h"
+#include "../Utils/IntMatrix.h"
+#include "../Utils/Consts.h"
+#include "../Utils/Location.h"
 #include <iostream>
 #include <vector>
 #include <cmath>

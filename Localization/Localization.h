@@ -10,7 +10,7 @@
 #include <libplayerc++/playerc++.h>
 #include "../Utils/ExtendedLocation.h"
 #include "Particle.h"
-#include "../Map.h"
+#include "../Map/Map.h"
 #include <vector>
 #include <iostream>
 #include <cmath>

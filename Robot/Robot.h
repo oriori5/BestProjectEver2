@@ -8,9 +8,8 @@
 #ifndef ROBOT_H_
 #define ROBOT_H_
 #include <libplayerc++/playerc++.h>
-#include "Particles/Localization.h"
-#include "Map.h"
-
+#include "../Localization/Localization.h"
+#include "../Map/Map.h"
 
 using namespace PlayerCc;
 
