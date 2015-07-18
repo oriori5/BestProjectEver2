@@ -7,6 +7,8 @@
 
 #include "WayPointManager.h"
 
+bool WayPointManager::isTargetReached = false;
+
 WayPointManager::WayPointManager(vector<Location> path, Map map, ConfigurationParametersStruct ParametersStruct)
 {
 	this->_originalMap = map;

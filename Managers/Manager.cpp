@@ -20,7 +20,7 @@ void Manager::run()
 	/*if(!(_curr->startCond()))
 		return;
 	_curr->action();*/
-	while(_curr !=NULL)
+	while(_curr !=NULL && !WayPointManager::isTargetReached)
 	{
 		while(_curr->stopCond() == false)
 		{

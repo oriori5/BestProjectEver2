@@ -39,7 +39,17 @@ void GoToWayPoint::action()
 	// if you reached your current waypoint, set a new one!
 	if (_robot->isClosetToLocation(wpManager->getCurrnetWayPoint().getLocation()))
 	{
-		wpManager->advanceWayPoint();
+		if (wpManager->isCurrentWayPointLastOne())
+		{
+			cout << "Reached the target!!! :-)" << endl;
+			WayPointManager::isTargetReached = true;
+			isWaypointSet = true;
+			return;
+		}
+		else
+		{
+			wpManager->advanceWayPoint();
+		}
 	}
 
 	Location waypoint_loc =  wpManager->getCurrnetWayPoint().getLocation();

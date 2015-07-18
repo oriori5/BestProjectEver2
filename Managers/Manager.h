@@ -11,6 +11,7 @@
 #include "../Movement/Behavior.h"
 #include "../Robot/Robot.h"
 #include "../Movement/Plan.h"
+#include "WayPointManager.h"
 
 class Manager
 {

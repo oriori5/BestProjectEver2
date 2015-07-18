@@ -23,6 +23,8 @@ using namespace std;
 
 class WayPointManager
 {
+public :
+	static bool isTargetReached;
 private :
 
 	Map _originalMap;
@@ -69,8 +71,13 @@ public:
 		return _wayPoints.size();
 	}
 
+	bool isCurrentWayPointLastOne()
+	{
+		return (_currentWayPoint == (_wayPoints.size() - 1));
+	}
+
 	vector<Location> getChosenPositions()
-			{
+	{
 		return _positions;
 	}
 
