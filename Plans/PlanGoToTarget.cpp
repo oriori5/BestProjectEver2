@@ -19,6 +19,7 @@ PlanGoToTarget::PlanGoToTarget(Robot* robot) : Plan(robot)
 	_beh[1]->addNextBehavior(_beh[2]);
 	_beh[1]->addNextBehavior(_beh[3]); // will only reach here if drive couldnt be started (aka blocked!) so handle obstacle.
 	_beh[2]->addNextBehavior(_beh[0]); // driving can lead to a waypoint -> and then we select a new one.
+	_beh[2]->addNextBehavior(_beh[1]); // ORI ADDED
 	_beh[2]->addNextBehavior(_beh[3]); // driving can lead to obstacle
 	_beh[3]->addNextBehavior(_beh[0]); // avoiding obstacles might lead to waypoint -> and then we select a new one.
 	_beh[3]->addNextBehavior(_beh[1]); // avoiding obstacles will change our angle, we need to set it back on target.

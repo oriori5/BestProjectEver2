@@ -24,12 +24,21 @@ bool GoForward::startCond()
 
 void GoForward::action()
 {
-	_robot->setSpeed(1.0f,0.0f);
+	_robot->setSpeed(0.3f,0.0f);
 }
 
 bool GoForward::stopCond()
 {
-	if(!isFree(Resources::forwardStartIndex,Resources::forwardEndIndex,0.42))
+	Location loc = _robot->getTargetLocation();
+	cout << "Forward, current loc = (" << _robot->getCurrentLocation().getX() << "," << _robot->getCurrentLocation().getY() << ")" << endl;
+	cout << "Forward, target loc = (" << loc.getX() << "," << loc.getY() << ")" << endl;
+	cout << "Forward, distance from target: " << _robot->getCurrentLocation().Distance(loc) << endl;
+	if (_robot->getCurrentLocation().Distance(loc) < 40.0f)
+	{
+		return (true);
+	}
+
+	if(!isFree(Resources::forwardStartIndex,Resources::forwardEndIndex,0.40))
 	{
 		return true;
 	}

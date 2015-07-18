@@ -14,16 +14,24 @@ Robot::Robot(char* ip, int port, Map map)
 	_lp = new LaserProxy(_pc);
 	_map = map;
 
+	_pp->SetOdometry(2.175, -2.875, 0.35);
+	//Bug in player
+	for(int i=0;i<15;i++)
+	{
+		_pc->Read();
+	}
+
+	//double x = _pp->GetXPos();
+	//double y = _pp->GetYPos();
+
 	_lc = new Localization(*_pp, _lp, map);
 
 	get_call = false;
 	get_call_left = false;
 
 	_pp->SetMotorEnable(true);
-	int i;
-
-	//Bug in player
-	for(i=0;i<15;i++)
+	//int i;
+	for(int i=0;i<15;i++)
 	{
 		_pc->Read();
 	}
@@ -34,6 +42,7 @@ bool turnOnTheNoise = false;
 void Robot::read()
 {
 	_pc->Read();
+
 }
 void Robot::setSpeed(float speed, float angularSpeed)
 {
@@ -63,7 +72,8 @@ double Robot::GetCurentYaw()
 
 Location Robot::getCurrentLocation()
 {
-	Location a(_lc->getEstimatedLocation().GetLocation().getX() / 100,_lc->getEstimatedLocation().GetLocation().getY() / 100);
+	Location a(_lc->getEstimatedLocation().GetLocation().getX(),_lc->getEstimatedLocation().GetLocation().getY());
+	//Location a(_lc->getEstimatedLocation().GetLocation().getX() / 100,_lc->getEstimatedLocation().GetLocation().getY() / 100);
 	return (a);
 }
 
@@ -74,6 +84,7 @@ float Robot::getYaw()
 
 void Robot::Update()
 {
+	_pc->Read();
 	_lc->UpdateParticles();
 	Location meters_robot_loc = getCurrentLocation();
 }
@@ -161,7 +172,7 @@ bool Robot::isClosetToLocation(Location location)
 {
     float distance = getCurrentLocation().Distance(location);
 
-	if (distance < 1.0f) // TODO : check what does "near" mean in numbers...
+	if (distance < 30.0f) // TODO : check what does "near" mean in numbers...
 	{
 		return true;
 	}

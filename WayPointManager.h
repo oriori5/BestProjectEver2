@@ -17,7 +17,7 @@
 #include "Utils/WayPoint.h"
 #include "Map.h"
 #include <cmath>
-
+#include <iostream>
 
 using namespace std;
 
@@ -126,7 +126,12 @@ private:
 	{
 		for (unsigned i = 0; i < _positions.size() ; i++)
 		{
-			this->_wayPoints.push_back(WayPoint(_positions[i],i));
+			Location loc((_positions[i].getX() + 1) * 2.5, (_positions[i].getY() + 1) * 2.5);
+			this->_wayPoints.push_back(WayPoint(loc,i));
+			//this->_wayPoints.push_back(WayPoint(_positions[i],i));
+			int x = _positions[i].getX();
+			int y = _positions[i].getY();
+			cout << "way point number " << i << " is (" << loc.getX() << ", " << loc.getY() << ")" << endl;
 		}
 	}
 };

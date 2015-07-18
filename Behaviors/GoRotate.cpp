@@ -19,7 +19,25 @@ GoRotate::GoRotate(Robot* robot) : Behavior(robot)
 bool GoRotate::startCond()
 {
 	direction_unit_vector = (_robot->getTargetLocation() - _robot->getCurrentLocation());
-	rad_angle = atan2(direction_unit_vector.getY(), direction_unit_vector.getX());
+	//rad_angle = atan2(fabs(direction_unit_vector.getY()), fabs(direction_unit_vector.getX()));
+	Location target_loc = _robot->getTargetLocation();
+	double distance = _robot->getCurrentLocation().Distance(target_loc);
+	rad_angle = asin(fabs(direction_unit_vector.getY()) / distance);
+
+	if (direction_unit_vector.getX() > 0)
+	{
+		right_angle = rad_angle + 0.1;
+	}
+	else
+	{
+		right_angle = M_PI - rad_angle + 0.1;
+	}
+
+	/*right_angle = - _robot->GetCurentYaw() - rad_angle + 0.2;
+	if (right_angle < 0)
+	{
+		right_angle += M_PI;
+	}*/
 
 	direction_decided = false;
     passed_correct_angle = false;
@@ -35,22 +53,30 @@ bool GoRotate::stopCond()
 {
 	//.Normalize();
 
+	cout << "current angle = " << _robot->getYaw() << ", target angle = " << right_angle << endl;
+	if (_robot->getYaw() >= right_angle - 0.03 && _robot->getYaw() <= right_angle + 0.03)
+	{
+		_robot->setSpeed(0.0, 0.0);
+		cout << "stop rotated!" << endl;
+		return true;
+	}
 
-	cout << "rad_angle : " << rad_angle << "robot_angle : " << _robot->getYaw() << endl;
-	cout << "fabs value : " << fabs(rad_angle - _robot->getYaw()) << endl;
+	//cout << "rad_angle : " << rad_angle << "robot_angle : " << _robot->getYaw() << endl;
+	//cout << "fabs value : " << fabs(rad_angle - _robot->getYaw()) << endl;
 
-	if ((fabs(rad_angle - _robot->getYaw()) <= 2.0 * M_PI / 180.0) ||
+	/*if ((fabs(rad_angle - _robot->getYaw()) <= 2.0 * M_PI / 180.0) ||
 	    (passed_correct_angle && (fabs(rad_angle - _robot->getYaw()) <= 5.0 * M_PI / 180.0))) // it is less than 3 degree diffrence.
 	{
 		_robot->setSpeed(0.0f,0.0f); // stop moving for now.
 		return true;
-	}
+	}*/
 
 	return false;
 }
 
 void GoRotate::action()
 {
+	_robot->setSpeed(0.0f, 0.10f);
 	//Location direction_unit_vector = (_robot->getTargetLocation() - _robot->getCurrentLocation());//.Normalize();
 	//double rad_angle = atan2(direction_unit_vector.getY(), direction_unit_vector.getX());
     /*if (rad_angle < 0)
@@ -58,7 +84,7 @@ void GoRotate::action()
     	rad_angle += (2 * M_PI);
     }*/
 
-    double curr_angle = _robot->getYaw();
+    /*double curr_angle = _robot->getYaw();
     curr_angle = curr_angle > 0? curr_angle : 2.0 * M_PI + curr_angle;
 
     if ((curr_angle > rad_angle &&  curr_angle - rad_angle < M_PI) ||
@@ -97,7 +123,7 @@ void GoRotate::action()
     		    passed_correct_angle = true;
     		}
     	}
-    }
+    }*/
 
     /*
 	// rotate slowly to target angle

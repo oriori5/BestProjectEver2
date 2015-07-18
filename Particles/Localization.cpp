@@ -21,7 +21,10 @@ Localization::Localization(Position2dProxy &position2dProxy, LaserProxy* laserPr
 	particles_vector = vector<Particle>();
 
 	Location robot_location_in_meters(pos_proxy->GetXPos(),pos_proxy->GetYPos());
-	privious_location.SetLocation(robot_location_in_meters.getX() * 100, robot_location_in_meters.getY() * 100);
+	double loc_x = ((pos_proxy->GetXPos() + 6.875) * 100);
+	double loc_y = (((pos_proxy->GetYPos() * -1) + 4.75) * 100);
+	privious_location.SetLocation(loc_x, loc_y);
+	//privious_location.SetLocation(robot_location_in_meters.getX() * 100, robot_location_in_meters.getY() * 100);
 	privious_location.setYaw(pos_proxy->GetYaw());
 	InitializeRandomParticles();
 }
@@ -42,20 +45,28 @@ ExtendedLocation Localization::getEstimatedLocation()
 
 		Particle best_particle = particles_vector.front();
 
+		//cout << "return estimated location = (" << best_particle.GetExtendedLocation().getX() << ", " << best_particle.GetExtendedLocation().getY() << ")" << endl;
 		return best_particle.GetExtendedLocation();
 }
 
 void Localization::UpdateParticles()
 {
+
 	Location robot_location_in_meters(pos_proxy->GetXPos(),pos_proxy->GetYPos());
 
-	double x = robot_location_in_meters.getX() * 100 - privious_location.getX();
-	double y = robot_location_in_meters.getY() * 100 - privious_location.getY();
+	int loc_x = ((pos_proxy->GetXPos() + 6.875) * 100);
+	int loc_y = (((pos_proxy->GetYPos() * -1) + 4.75) * 100);
+
+	double x = loc_x - privious_location.getX();
+	double y = loc_y - privious_location.getY();
+	//double x = robot_location_in_meters.getX() * 100 - privious_location.getX();
+	//double y = robot_location_in_meters.getY() * 100 - privious_location.getY();
 	double yaw = pos_proxy->GetYaw() - privious_location.getYaw();
 
 	unsigned int particle_count = 0;
 
-	privious_location.SetLocation(robot_location_in_meters.getX() * 100, robot_location_in_meters.getY() * 100);
+	privious_location.SetLocation(loc_x, loc_y);
+	//privious_location.SetLocation(robot_location_in_meters.getX() * 100, robot_location_in_meters.getY() * 100);
 	privious_location.setYaw(pos_proxy->GetYaw());
 	//cout << "oudometry location (" << meters_robot_loc.getX() << "," << meters_robot_loc.getY() << "," << last_location.getYaw() * 180.0 / M_PI << ")" << endl;
 
@@ -110,8 +121,12 @@ void Localization::InitializeRandomParticles()
 
 	while(particle_count < 100)
 	{
-		int rand_x = rand() % 15 + (privious_location.getX() - 1); // 0.25 meter radius
-		int rand_y = rand() % 15 + (privious_location.getY() - 1); // 0.15 meter radius
+		int loc_x = privious_location.getX();
+		int loc_y = privious_location.getY();
+		int rand_x = rand() % 15 + (loc_x - 1); // 0.25 meter radius
+		int rand_y = rand() % 15 + (loc_y - 1); // 0.15 meter radius
+		//int rand_x = rand() % 15 + (privious_location.getX() - 1); // 0.25 meter radius
+		//int rand_y = rand() % 15 + (privious_location.getY() - 1); // 0.15 meter radius
 
 		if (rand_x < 0)
 		{
@@ -128,9 +143,14 @@ void Localization::InitializeRandomParticles()
 		rand_yaw = fmod(rand_yaw, 360.0);
 		rand_yaw *= M_PI / 180.0;
 
-		if (grid_map.GetMapCellByRealLocation(rand_x / 100.0f, rand_y / 100.0f) != 1)
+		if (grid_map.GetMapCellByRealLocation(rand_x, rand_y) != 1)
+		//if (grid_map.GetMapCellByRealLocation(rand_x / 100.0f, rand_y / 100.0f) != 1)
+		//if (grid_map.GetMapCellByRealLocation(rand_x, rand_y) != 1)
 		{
+
 			Particle p =  Particle(rand_x, rand_y, rand_yaw, 1.0);
+			//Particle p =  Particle(rand_x, rand_y, rand_yaw, 1.0);
+			cout << "created new particle with following data = (" << rand_x << "," << rand_y << "," << rand_yaw << ")" << endl;
 			particles_vector.push_back(p);
 			particle_count++;
 		}

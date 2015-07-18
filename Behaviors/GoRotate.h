@@ -18,6 +18,7 @@ private:
 	bool direction_decided;
 	bool passed_correct_angle;
 	bool is_dir_right;
+	double right_angle;
 public:
 	GoRotate(Robot* robot);
 	virtual ~GoRotate() {};

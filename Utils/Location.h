@@ -35,7 +35,10 @@ public:
 
 	inline float Distance(Location& v)
 	{
-		return(sqrtf((v.getX() - getX()) * v.getX() - getX()) +( (v.getY() - getY()) * (v.getY() - getY())));
+		int XxX = (v.getX() - getX()) * (v.getX() - getX());
+		int YxY = (v.getY() - getY()) * (v.getY() - getY());
+		return (sqrt(XxX + YxY));
+		//return(sqrtf((v.getX() - getX()) * v.getX() - getX()) +( (v.getY() - getY()) * (v.getY() - getY())));
 	}
 
 	int getX()
