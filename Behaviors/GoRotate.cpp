@@ -106,19 +106,19 @@ void GoRotate::action()
 {
 	if	(_robot -> GetCurentYaw()> 0 && right_angle > 0 && right_angle >_robot -> GetCurentYaw())
 	{
-		_robot->setSpeed(0.0f, 0.10f);
+		_robot->setSpeed(0.0f, 0.12f);
 	}
 	else if	(_robot -> GetCurentYaw()> 0 && right_angle > 0 && right_angle <_robot -> GetCurentYaw())
 	{
-		_robot->setSpeed(0.0f, -0.10f);
+		_robot->setSpeed(0.0f, -0.12f);
 	}
 	else if	(_robot -> GetCurentYaw()< 0 && right_angle < 0 && right_angle >_robot -> GetCurentYaw())
 	{
-		_robot->setSpeed(0.0f, 0.10f);
+		_robot->setSpeed(0.0f, 0.12f);
 	}
 	else if	(_robot -> GetCurentYaw()< 0 && right_angle <0 && right_angle <_robot -> GetCurentYaw())
 	{
-		_robot->setSpeed(0.0f, -0.10f);
+		_robot->setSpeed(0.0f, -0.12f);
 	}
 	else
 	{
@@ -140,11 +140,11 @@ void GoRotate::action()
 
 			if (sum_for_right_dir < sum_for_left_dir)
 			{
-				_robot->setSpeed(0.0f, -0.10f);
+				_robot->setSpeed(0.0f, -0.12f);
 			}
 			else
 			{
-				_robot->setSpeed(0.0f, 0.10f);
+				_robot->setSpeed(0.0f, 0.12f);
 			}
 		}
 		else if (a < 0 && b > 0)
@@ -159,11 +159,11 @@ void GoRotate::action()
 
 			if (sum_for_right_dir < sum_for_left_dir)
 			{
-				_robot->setSpeed(0.0f, 0.10f);
+				_robot->setSpeed(0.0f, 0.12f);
 			}
 			else
 			{
-				_robot->setSpeed(0.0f, -0.10f);
+				_robot->setSpeed(0.0f, -0.12f);
 			}
 		}
 	}
