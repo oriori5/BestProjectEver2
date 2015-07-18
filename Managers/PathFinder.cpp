@@ -7,26 +7,27 @@
 
 #include "PathFinder.h"
 
-
 PathFinder::PathFinder(Map map)
 {
 	this->_map = map;
 	_costsMap.DefineSize(map._map._height, map._map._width);
 }
 
-//************
-//	Navigation methods
-//************
-vector<Location>  PathFinder::findPath(Location source, Location destination)
+vector<Location> PathFinder::findPath(Location source, Location destination)
 {
-	// a graph object
+	// Creating a graph object
 	MapHolderAStar graphObject(_map);
 
-	// Apply A*
+	// Run the A-Star algorithm to find a path
 	_searcher.aStarSearch(graphObject, source, destination, _parentsMap, _costsMap);
 
-	// Get path from parents map
-	_resultPath = pathFromParentMap(source, destination);
+	// Get the path from the parents map
+	_resultPath = getPathFromParentMap(source, destination);
+
+	/*
+	 * This code is for the bonus!
+	 * Printing the robot path to a PNG file.
+	 */
 
 	// Copy the original map
 	IntMatrix mapWithPath;
@@ -51,4 +52,29 @@ vector<Location>  PathFinder::findPath(Location source, Location destination)
 
 	// Return the path
 	return (_resultPath);
+}
+
+vector<Location> PathFinder::getPathFromParentMap(Location from, Location to)
+{
+	vector<Location> pathResult;
+
+	// Starts from the target location (and then going to the start location)
+	Location current = to;
+
+	pathResult.insert(pathResult.begin(),current);
+
+	// If we didn't get the start locaton, continue saving the path
+	while ((current.getX() != from.getX()) || (current.getY() != from.getY()))
+	{
+		// Adding the current location to the path result
+		current = _parentsMap._matrix[current.getY()][current.getX()];
+		pathResult.insert(pathResult.begin(),current);
+	}
+
+	// Return the full path
+	return (pathResult);
+}
+
+PathFinder::~PathFinder()
+{
 }

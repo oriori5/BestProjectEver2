@@ -6,7 +6,6 @@
  *      Author: colman
  */
 
-
 #ifndef COFIGURATIONMANAGER_H_
 #define COFIGURATIONMANAGER_H_
 
@@ -19,7 +18,10 @@
 
 using namespace std;
 
- struct ConfigurationParametersStruct
+/*
+ * This struct contains all the information data that we get from the config file
+ */
+struct ConfigurationParametersStruct
 {
 	string map_path;
 	int robot_location_x;
@@ -36,8 +38,13 @@ using namespace std;
 class CofigurationManager
 {
 public:
+	// Ctor and Dtor
 	CofigurationManager();
 	virtual ~CofigurationManager();
+
+	/*
+	 * Reading the parameters from the config file
+	 */
 	ConfigurationParametersStruct ReadFromFile();
 };
 

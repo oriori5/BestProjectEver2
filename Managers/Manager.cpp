@@ -15,25 +15,28 @@ Manager::Manager(Robot* robot, Plan* pln)
 
 void Manager::run()
 {
+	// Read and update data from the robot
 	_robot->read();
 	_robot->Update();
-	/*if(!(_curr->startCond()))
-		return;
-	_curr->action();*/
+
+	// As long as we have behavior to perform and we didn't reached the target
 	while(_curr !=NULL && !WayPointManager::isTargetReached)
 	{
+		// Run the current behavior until it finish
 		while(_curr->stopCond() == false)
 		{
 			_curr->action();
 			_robot->read();
 			_robot->Update();
 		}
+
+		// Go to the next behavior
 		_curr = _curr->selectNext();
 		_robot->read();
 		_robot->Update();
 	}
 }
 
-Manager::~Manager() {
-	// TODO Auto-generated destructor stub
+Manager::~Manager()
+{
 }

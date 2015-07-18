@@ -15,13 +15,19 @@
 
 class Manager
 {
+private:
 	Behavior* _curr;
 	Robot* _robot;
 
 public:
+	// Ctor and Dtor
 	Manager(Robot* robot, Plan* pln);
-	void run();
 	virtual ~Manager();
+
+	/*
+	 * The main function that run the manager
+	 */
+	void run();
 };
 
 #endif /* MANAGER_H_ */

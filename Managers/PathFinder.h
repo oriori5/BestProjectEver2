@@ -15,57 +15,25 @@ class PathFinder
 private:
 	Map _map;
 	vector<Location> _resultPath;
-	vector<Location> _locationsMatrix;
 	AStarSearcher _searcher;
 	LocationMatrix _parentsMap;
 	IntMatrix _costsMap;
 
 public:
-	//************
-	//	Ctor and initialization
-	//************
+	// Ctor and Dtor
 	PathFinder(Map map);
+	virtual ~PathFinder();
 
-	//************
-	//	Accessors
-	//************
-	vector<Location> getChosenPath()
-	{
-		return _locationsMatrix;
-	}
-
-
-	//************
-	//	Navigation methods
-	//************
-	/**
-	 * Orders the class to find the path from source to destination and
-	 * keep it.
+	/*
+	 * Find the path from source to destination (using A-Star algorithm)
 	 */
 	vector<Location> findPath(Location source, Location destination);
 
-private :
-
-	//***********
-	//	Path finding helpers
-	//***********
-	vector<Location> pathFromParentMap(Location from, Location to)
-	{
-		vector<Location> path;
-
-		// Starts from the end and go to the begining
-		Location current = to;
-
-		path.insert(path.begin(),current);
-
-		while ((current.getX() != from.getX()) || (current.getY() != from.getY()))
-		{
-			current = _parentsMap._matrix[current.getY()][current.getX()];
-			path.insert(path.begin(),current);
-		}
-
-		return path;
-	}
+private:
+	/*
+	 * Get the full path from the parents map (that we got from the A-Star algorithm)
+	 */
+	vector<Location> getPathFromParentMap(Location from, Location to);
 };
 
 #endif /* PATHFINDER_H_ */

@@ -48,7 +48,7 @@ void GoToWayPoint::action()
 		}
 		else
 		{
-			wpManager->advanceWayPoint();
+			wpManager->continueToNextWayPoint();
 		}
 	}
 
