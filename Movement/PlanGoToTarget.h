@@ -17,12 +17,11 @@
 
 class PlanGoToTarget : public Plan
 {
-	Behavior* _beh[4];
-
+	Behavior* _behaviorsTree[4];
 public:
 	PlanGoToTarget(Robot* robot);
 	PlanGoToTarget(Robot* robot, WayPointManager* wpManager);
-	Behavior* getStartPoint();
+	Behavior* getBehvaiorToBeginWith();
 	virtual ~PlanGoToTarget();
 };
 

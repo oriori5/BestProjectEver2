@@ -15,7 +15,7 @@ GoToWayPoint::GoToWayPoint(Robot* robot) : Behavior(robot)
 bool GoToWayPoint::startCond()
 {
 	// Check if we should proceed to the next way point
-    if (_robot->isClosetToLocation(wpManager->getCurrnetWayPoint().getLocation()))
+    if (_robot->isCloseToLocation(wpManager->getCurrnetWayPoint().getLocation()))
     {
     	canSetNewWayPoint = false;
     	cout << "Started Action_SelectWaypoint" << endl;
@@ -35,7 +35,7 @@ bool GoToWayPoint::stopCond()
 void GoToWayPoint::action()
 {
 	// If you reached your current waypoint, set the next one
-	if (_robot->isClosetToLocation(wpManager->getCurrnetWayPoint().getLocation()))
+	if (_robot->isCloseToLocation(wpManager->getCurrnetWayPoint().getLocation()))
 	{
 		// If we reached the last way point
 		if (wpManager->isCurrentWayPointLastOne())

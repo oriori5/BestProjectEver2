@@ -7,38 +7,48 @@
 
 #include "PlanGoToTarget.h"
 
-PlanGoToTarget::PlanGoToTarget(Robot* robot) : Plan(robot)
-{
-	//Creating Behaviors
-	_beh[0] = new GoToWayPoint(robot); // first thing to be done! EVEN if start cond doesnt return true.
-	_beh[1] = new GoRotate(robot);
-	_beh[2] = new GoForward(robot);
-	_beh[3] = new GoObstacle(robot);
-	//Connecting Behaviors
-	_beh[0]->addNextBehavior(_beh[1]); // first select a waypoint and than move to it.
-	_beh[1]->addNextBehavior(_beh[2]);
-	_beh[1]->addNextBehavior(_beh[3]); // will only reach here if drive couldnt be started (aka blocked!) so handle obstacle.
-	_beh[2]->addNextBehavior(_beh[0]); // driving can lead to a waypoint -> and then we select a new one.
-	_beh[2]->addNextBehavior(_beh[1]); // ORI ADDED
-	_beh[2]->addNextBehavior(_beh[3]); // driving can lead to obstacle
-	_beh[3]->addNextBehavior(_beh[0]); // avoiding obstacles might lead to waypoint -> and then we select a new one.
-	_beh[3]->addNextBehavior(_beh[1]); // avoiding obstacles will change our angle, we need to set it back on target.
-	_start = _beh[0];
-}
-
 PlanGoToTarget::PlanGoToTarget(Robot* robot, WayPointManager* wpManager) : PlanGoToTarget(robot)
 {
-    ((GoToWayPoint*)_beh[0])->setWaypointManager(wpManager);
+    ((GoToWayPoint*)_behaviorsTree[0])->setWaypointManager(wpManager);
+}
+
+PlanGoToTarget::PlanGoToTarget(Robot* robot) : Plan(robot)
+{
+	// Create the nodes of ALL the behaviors
+	_behaviorsTree[0] = new GoToWayPoint(robot);
+	_behaviorsTree[1] = new GoRotate(robot);
+	_behaviorsTree[2] = new GoForward(robot);
+	_behaviorsTree[3] = new GoObstacle(robot);
+
+	// Add the nodes of GoToWayPoint behavior (like a state machine)
+	_behaviorsTree[0]->addNextBehavior(_behaviorsTree[1]);
+
+	// Add the nodes of GoRotate behavior (like a state machine)
+	_behaviorsTree[1]->addNextBehavior(_behaviorsTree[2]);
+	_behaviorsTree[1]->addNextBehavior(_behaviorsTree[3]);
+
+	// Add the nodes of GoForward behavior (like a state machine)
+	_behaviorsTree[2]->addNextBehavior(_behaviorsTree[0]);
+	_behaviorsTree[2]->addNextBehavior(_behaviorsTree[1]);
+	_behaviorsTree[2]->addNextBehavior(_behaviorsTree[3]);
+
+	// Add the nodes of GoObstacle behavior (like a state machine)
+	_behaviorsTree[3]->addNextBehavior(_behaviorsTree[0]);
+	_behaviorsTree[3]->addNextBehavior(_behaviorsTree[1]);
+
+	// Set the first behavior to begin with
+	_behaviorToBeginWith = _behaviorsTree[0];
 }
 
 PlanGoToTarget::~PlanGoToTarget()
 {
-	// TODO Auto-generated destructor stub
-	for(int i=0;i<3;i++)
-		delete _beh[i];
+	/*for(int i=0;i<3;i++)
+	{
+		delete _behaviorsTree[i];
+	}*/
 }
-Behavior* PlanGoToTarget::getStartPoint()
+Behavior* PlanGoToTarget::getBehvaiorToBeginWith()
 {
-	return this->_start;
+	return this->_behaviorToBeginWith;
 }
 

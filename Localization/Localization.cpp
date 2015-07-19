@@ -10,8 +10,6 @@
 // Empty Ctor
 Localization::Localization()
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 // Full Ctor
@@ -27,8 +25,8 @@ Localization::Localization(Position2dProxy &position2dProxy, LaserProxy* laserPr
 	Location robot_location_in_meters(pos_proxy->GetXPos(),pos_proxy->GetYPos());
 	double loc_x = pos_proxy->GetXPos() * 100;
 	double loc_y = pos_proxy->GetYPos() * 100;
-	//double loc_x = ((pos_proxy->GetXPos() + 6.875) * 100);
-	//double loc_y = (((pos_proxy->GetYPos() * -1) + 4.75) * 100);
+	//double loc_x = ((pos_proxy->GetXPos() + 6.875) * 100);//simulator
+	//double loc_y = (((pos_proxy->GetYPos() * -1) + 4.75) * 100);//simulator
 	privious_location.SetLocation(loc_x, loc_y);
 	privious_location.setYaw(pos_proxy->GetYaw());
 	InitParticles();
@@ -64,21 +62,13 @@ void Localization::UpdateParticles()
 	// Calculation the location
 	int loc_x = pos_proxy->GetXPos() * 100;
 	int loc_y = pos_proxy->GetYPos() * 100;
-	//int loc_x = ((pos_proxy->GetXPos() + 6.875) * 100);
-	//int loc_y = (((pos_proxy->GetYPos() * -1) + 4.75) * 100);
+	//int loc_x = ((pos_proxy->GetXPos() + 6.875) * 100);//simulator
+	//int loc_y = (((pos_proxy->GetYPos() * -1) + 4.75) * 100);//simulator
 
 	// Calc the real location
 	double x = loc_x - privious_location.getX();
 	double y = -1 * (loc_y - privious_location.getY());
 	double yaw = pos_proxy->GetYaw() - privious_location.getYaw();
-	/*if (privious_location.getYaw() >= 0)
-	{
-		yaw = pos_proxy->GetYaw() - privious_location.getYaw();
-	}
-	else if (privious_location.getYaw() < 0)
-	{
-		yaw = pos_proxy->GetYaw() + privious_location.getYaw();
-	}*/
 
 	unsigned int particle_count = 0;
 
@@ -178,5 +168,4 @@ void Localization::InitParticles()
 
 Localization::~Localization()
 {
-	// TODO Auto-generated destructor stub
 }

@@ -21,21 +21,19 @@ class Robot
 	LaserProxy* _lp;
 	Localization* _lc;
 	Map _map;
-	bool get_call;
-	bool get_call_left;
+	bool isStillBlocked;
+	bool shouldTurnleft;
 	Location _target;
-
 
 public:
 	Robot(char* ip, int port, Map _map);
 	void read();
 	void setSpeed(float speed, float angularSpeed);
-	void setSpeed(double xSpeed, double ySpeed, double yaw);
 	double getLaserDistance(int index);
 	bool isObstacle(bool* blocked_right);
-	bool isRightSideClear();
-	bool isLeftSideClear();
-	bool isClosetToLocation(Location location);
+	bool isRightSideFree();
+	bool isLeftSideFree();
+	bool isCloseToLocation(Location location);
 	void setTargetLocation(Location target);
 	Location getTargetLocation();
 	double GetCurentYaw();
@@ -44,8 +42,6 @@ public:
 	Location getCurrentLocation();
 	float getYaw();
 	void Update();
-
-
 	virtual ~Robot();
 };
 

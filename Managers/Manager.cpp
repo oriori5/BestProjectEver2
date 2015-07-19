@@ -10,7 +10,7 @@
 Manager::Manager(Robot* robot, Plan* pln)
 {
 	_robot = robot;
-	_curr = pln->getStartPoint();
+	_curr = pln->getBehvaiorToBeginWith();
 }
 
 void Manager::run()
