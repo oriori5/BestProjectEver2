@@ -12,7 +12,9 @@ Behavior::Behavior(Robot* robot)
 	_robot = robot;
 }
 
-// Is the index is free?
+/*
+ * Checking if the front of the area is clear
+ */
 bool Behavior::isFree(int startIndex, int endIndex, double distance)
 {
 	bool free = true;
@@ -36,18 +38,18 @@ bool Behavior::isFree(int startIndex, int endIndex, double distance)
 // Add behaviors
 void Behavior::addNextBehavior(Behavior* next)
 {
-	_behaviorVector.push_back(next);
+	_vecOptionalNextBehaviors.push_back(next);
 }
 
 // Select next behavior
 Behavior* Behavior::selectNext()
 {
-	//Run over vector and return first true condition
-	for (int i=0; i < _behaviorVector.size(); i++)
+	// Run over the next optional behaviors and choose the better behavior to use
+	for (int i=0; i < _vecOptionalNextBehaviors.size(); i++)
 	{
-		if (_behaviorVector[i]->startCond())
+		if (_vecOptionalNextBehaviors[i]->startCond())
 		{
-			return _behaviorVector[i];
+			return _vecOptionalNextBehaviors[i];
 		}
 	}
 

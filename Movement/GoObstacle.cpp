@@ -9,9 +9,8 @@
 
 GoObstacle::GoObstacle(Robot* robot) : Behavior(robot)
 {
-	// TODO Auto-generated constructor stub
     obstacle_from_right = false;
-    drive_away = false;
+    can_we_keep_driving = false;
     drive_away_start_time = 999;
 }
 
@@ -22,21 +21,22 @@ bool GoObstacle::startCond()
 }
 bool GoObstacle::stopCond()
 {
+
     if (!_robot->isObstacle(&obstacle_from_right))
     {
-    	if(drive_away)
+    	if (can_we_keep_driving)
     	{
     	   return false; // we are not blocked and moving forward
     	}
     	else if (float(drive_away_start_time) == 999) // we are not blocked but need to move away.
     	{
-    		drive_away = true;
+    		can_we_keep_driving = true;
     		drive_away_start_time = clock();
     		return false;
     	}
     	else // not blocked and moved away
     	{
-    		drive_away = false;
+    		can_we_keep_driving = false;
     		drive_away_start_time = 999;
     		return true;
     	}
@@ -63,12 +63,12 @@ void GoObstacle::action()
 
 	    }
 	}
-	else if (drive_away)
+	else if (can_we_keep_driving)
 	{
 		if(clock() - drive_away_start_time >= DRIVE_AWAY_TIME_SECONDS)
 		{
 			_robot->setSpeed(0.0f,0.0f); // stop moving for now.
-		   drive_away = false; // finished driving away.
+			can_we_keep_driving = false; // finished driving away.
 		}
 		// if we still need to move away, do it.
 		else

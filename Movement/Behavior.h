@@ -11,13 +11,14 @@
 
 class Behavior
 {
-
-vector<Behavior*> _behaviorVector;
+private:
+vector<Behavior*> _vecOptionalNextBehaviors;
 
 protected:
 	Robot* _robot;
 
 public:
+	// Ctor and Dtor
 	Behavior();
 	Behavior(Robot* robot);
 	virtual ~Behavior();

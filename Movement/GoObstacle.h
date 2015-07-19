@@ -18,7 +18,7 @@ class GoObstacle : public Behavior
 private:
 	bool obstacle_from_right;
 	clock_t drive_away_start_time;
-	bool drive_away;
+	bool can_we_keep_driving;
 public:
 	GoObstacle(Robot* robot);
 	virtual ~GoObstacle() {};

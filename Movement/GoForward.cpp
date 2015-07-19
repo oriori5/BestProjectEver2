@@ -10,7 +10,6 @@
 // Ctor
 GoForward::GoForward(Robot* robot):Behavior(robot)
 {
-
 }
 
 // Start Condition
@@ -28,7 +27,7 @@ bool GoForward::startCond()
 // Action!
 void GoForward::action()
 {
-	_robot->setSpeed(0.25f,0.0f);
+	_robot->setSpeed(0.2f,0.0f);
 }
 
 // Stop Condition
@@ -37,6 +36,7 @@ bool GoForward::stopCond()
 	// Get the target location of the robot
 	Location loc = _robot->getTargetLocation();
 
+	// Debug prints
 	cout << "Forward, current yaw = " << _robot->GetCurentYaw() << endl;
 	cout << "Forward, get yaw = " << _robot->getYaw() << endl;
 	cout << "Forward, current loc = (" << _robot->getCurrentLocation().getX() << "," << _robot->getCurrentLocation().getY() << ") / (" << (_robot->getCurrentLocation().getX() / 2.5) << "," << (_robot->getCurrentLocation().getY() / 2.5) << ")" << endl;

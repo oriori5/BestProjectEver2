@@ -93,7 +93,7 @@ Location Robot::getCurrentLocation()
 
 float Robot::getYaw()
 {
-	return (_lc->getPredictedLocation().getYaw());
+	return (fabs(_lc->getPredictedLocation().getYaw()));
 }
 
 void Robot::Update()
@@ -186,7 +186,7 @@ bool Robot::isClosetToLocation(Location location)
 {
     float distance = getCurrentLocation().Distance(location);
 
-	if (distance < 30.0f) // TODO : check what does "near" mean in numbers...
+	if (distance < 30.0f)
 	{
 		return true;
 	}

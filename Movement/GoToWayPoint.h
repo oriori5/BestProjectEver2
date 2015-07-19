@@ -14,7 +14,7 @@
 class GoToWayPoint : public Behavior
 {
 private:
-	bool isWaypointSet;
+	bool canSetNewWayPoint;
 	WayPointManager* wpManager;
 public:
 	GoToWayPoint(Robot* robot);

@@ -10,6 +10,7 @@
 #include <libplayerc++/playerc++.h>
 #include "../Localization/Localization.h"
 #include "../Map/Map.h"
+#include "../Managers/WayPointManager.h"
 
 using namespace PlayerCc;
 

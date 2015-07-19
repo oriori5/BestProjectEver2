@@ -15,7 +15,7 @@
 #include "GoRotate.h"
 #include "GoObstacle.h"
 
-class PlanGoToTarget: public Plan
+class PlanGoToTarget : public Plan
 {
 	Behavior* _beh[4];
 

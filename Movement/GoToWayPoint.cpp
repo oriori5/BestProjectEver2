@@ -9,55 +9,57 @@
 
 GoToWayPoint::GoToWayPoint(Robot* robot) : Behavior(robot)
 {
-	// TODO Auto-generated constructor stub
-	isWaypointSet = false;
+	canSetNewWayPoint = false;
 }
 
 bool GoToWayPoint::startCond()
 {
-	// check if the robot is near our current waypoint.
+	// Check if we should proceed to the next way point
     if (_robot->isClosetToLocation(wpManager->getCurrnetWayPoint().getLocation()))
     {
-    	isWaypointSet = false; // do it before we select a waypoint. so action will be called.
+    	canSetNewWayPoint = false;
     	cout << "Started Action_SelectWaypoint" << endl;
     	return true;
     }
 
-    // the robot is not close to the current waypoint. cant switch waypoints.
+    // No need to switch way point
     return false;
 }
 
 bool GoToWayPoint::stopCond()
 {
-	// if the waypoint was not set, stay in the behaviour.
-	// basicly im just making sure the action func ran atleast once.
-   return isWaypointSet;
+	// If we can't set new way point we stay in this behavior
+    return canSetNewWayPoint;
 }
 
 void GoToWayPoint::action()
 {
-	// if you reached your current waypoint, set a new one!
+	// If you reached your current waypoint, set the next one
 	if (_robot->isClosetToLocation(wpManager->getCurrnetWayPoint().getLocation()))
 	{
+		// If we reached the last way point
 		if (wpManager->isCurrentWayPointLastOne())
 		{
 			cout << "Reached the target!!! :-)" << endl;
 			WayPointManager::isTargetReached = true;
-			isWaypointSet = true;
+			canSetNewWayPoint = true;
 			return;
 		}
+		// We are not in the last way point, keep going
 		else
 		{
 			wpManager->continueToNextWayPoint();
+			cout << "Switched to the next waypoint" << endl;
 		}
 	}
 
 	Location waypoint_loc =  wpManager->getCurrnetWayPoint().getLocation();
 
-	// Give the robot his current target. (might be the same way point if he didn't reach it or a new one).
+	// Set the target location to the robot (If we reached a way point, assign new one,
+	// if not, we stay in the current way point)
 	_robot->setTargetLocation(waypoint_loc);
 
-	isWaypointSet = true;
+	canSetNewWayPoint = true;
 }
 
 void GoToWayPoint::setWaypointManager(WayPointManager* wp)
