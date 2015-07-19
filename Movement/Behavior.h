@@ -6,8 +6,8 @@
  */
 #ifndef BEHAVIOR_H_
 #define BEHAVIOR_H_
+
 #include "../Robot/Robot.h"
-#include "ActionResult.h"
 
 class Behavior
 {
