@@ -17,7 +17,7 @@ GoForward::GoForward(Robot* robot):Behavior(robot)
 bool GoForward::startCond()
 {
 	// If the index is free
-	if(isFree(Resources::forwardStartIndex,Resources::forwardEndIndex,0.43))
+	if(isFree(FORWARD_START_INDEX,FORWARD_END_INDEX,0.43))
 	{
 		return true;
 	}
@@ -51,7 +51,7 @@ bool GoForward::stopCond()
 	}
 
 	// If the index not free..
-	if(!isFree(Resources::forwardStartIndex,Resources::forwardEndIndex,0.40))
+	if(!isFree(FORWARD_START_INDEX,FORWARD_END_INDEX,0.40))
 	{
 		cout << "Forward, becuade is not free" << endl;
 

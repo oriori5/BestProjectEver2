@@ -24,7 +24,6 @@ int main()
 	Location robotLoc(ParametersStruct.robot_location_x, ParametersStruct.robot_location_y);
 	Location destLoc(ParametersStruct.dest_x, ParametersStruct.dest_y);
 	vector<Location> _resultPath = PathFinder.findPath(robotLoc, destLoc);
-	cout << "the p was read are:" << endl;
 	WayPointManager WayPointManager(_resultPath,mapObject,ParametersStruct);
 	//WayPointManager::isTargetReached = false;
 

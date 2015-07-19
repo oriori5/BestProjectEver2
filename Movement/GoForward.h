@@ -10,8 +10,8 @@
 
 #include "Behavior.h"
 #include "../Robot/Robot.h"
-#include "../Utils/Resources.h"
 #include "../Utils/Location.h"
+#include "../Utils/Consts.h"
 
 class GoForward: public Behavior
 {
