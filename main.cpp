@@ -27,7 +27,8 @@ int main()
 	WayPointManager WayPointManager(_resultPath,mapObject,ParametersStruct);
 	//WayPointManager::isTargetReached = false;
 
-	Robot robot("localhost",6665, mapObject);
+	//Robot robot("localhost",6665, mapObject);
+	Robot robot("10.10.245.65",6665, mapObject);
 	PlanGoToTarget plnToTarget(&robot, &WayPointManager);
 	Manager manager(&robot, &plnToTarget);
 	manager.run();

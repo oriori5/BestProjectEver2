@@ -25,8 +25,10 @@ Localization::Localization(Position2dProxy &position2dProxy, LaserProxy* laserPr
 
 	// Set the robot location, privious location and the particles.
 	Location robot_location_in_meters(pos_proxy->GetXPos(),pos_proxy->GetYPos());
-	double loc_x = ((pos_proxy->GetXPos() + 6.875) * 100);
-	double loc_y = (((pos_proxy->GetYPos() * -1) + 4.75) * 100);
+	double loc_x = pos_proxy->GetXPos() * 100;
+	double loc_y = pos_proxy->GetYPos() * 100;
+	//double loc_x = ((pos_proxy->GetXPos() + 6.875) * 100);
+	//double loc_y = (((pos_proxy->GetYPos() * -1) + 4.75) * 100);
 	privious_location.SetLocation(loc_x, loc_y);
 	privious_location.setYaw(pos_proxy->GetYaw());
 	InitParticles();
@@ -57,16 +59,26 @@ ExtendedLocation Localization::getPredictedLocation()
 void Localization::UpdateParticles()
 {
 	// Set Robot Location
-	Location robot_location_in_meters(pos_proxy->GetXPos(),pos_proxy->GetYPos());
+	//Location robot_location_in_meters(pos_proxy->GetXPos(),pos_proxy->GetYPos());
 
 	// Calculation the location
-	int loc_x = ((pos_proxy->GetXPos() + 6.875) * 100);
-	int loc_y = (((pos_proxy->GetYPos() * -1) + 4.75) * 100);
+	int loc_x = pos_proxy->GetXPos() * 100;
+	int loc_y = pos_proxy->GetYPos() * 100;
+	//int loc_x = ((pos_proxy->GetXPos() + 6.875) * 100);
+	//int loc_y = (((pos_proxy->GetYPos() * -1) + 4.75) * 100);
 
 	// Calc the real location
 	double x = loc_x - privious_location.getX();
-	double y = loc_y - privious_location.getY();
+	double y = -1 * (loc_y - privious_location.getY());
 	double yaw = pos_proxy->GetYaw() - privious_location.getYaw();
+	/*if (privious_location.getYaw() >= 0)
+	{
+		yaw = pos_proxy->GetYaw() - privious_location.getYaw();
+	}
+	else if (privious_location.getYaw() < 0)
+	{
+		yaw = pos_proxy->GetYaw() + privious_location.getYaw();
+	}*/
 
 	unsigned int particle_count = 0;
 

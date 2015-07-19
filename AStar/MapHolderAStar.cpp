@@ -28,7 +28,7 @@ MapHolderAStar::MapHolderAStar(Map mapObj)
 		{
 			if (mapObj._map._matrix[row][col] == 2)
 			{
-				Map::BlowCell(_costs._matrix, mapObj._map._height, mapObj._map._width, row, col, 5, 500);
+				Map::BlowCell(_costs._matrix, mapObj._map._height, mapObj._map._width, row, col, 7, 500);
 			}
 		}
 	}
@@ -40,7 +40,7 @@ MapHolderAStar::MapHolderAStar(Map mapObj)
 		{
 			if (_costs._matrix[row][col] == 500)
 			{
-				Map::BlowCell(_costs._matrix, mapObj._map._height, mapObj._map._width, row, col, 3, 100);
+				Map::BlowCell(_costs._matrix, mapObj._map._height, mapObj._map._width, row, col, 4, 100);
 			}
 		}
 	}

@@ -39,11 +39,11 @@ bool GoRotate::startCond()
 	}
 	else if (x_target > x_robot && y_target > y_robot)
 	{
-		right_angle = -temp_angle;
+		right_angle = (2 * M_PI) - temp_angle;
 	}
 	else if (x_target < x_robot && y_target > y_robot)
 	{
-		right_angle = -M_PI + temp_angle;
+		right_angle = M_PI + temp_angle;
 	}
 
 	//direction_unit_vector = (_robot->getTargetLocation() - _robot->getCurrentLocation());
@@ -81,8 +81,8 @@ bool GoRotate::stopCond()
 {
 	//.Normalize();
 
-	cout << "current angle = " << _robot->GetCurentYaw() << ", target angle = " << right_angle << endl;
-	if (_robot->GetCurentYaw() >= right_angle - 0.03 && _robot->GetCurentYaw() <= right_angle + 0.03)
+	cout << "current angle = " << _robot->getYaw() << ", target angle = " << right_angle << endl;
+	if (_robot->getYaw() >= right_angle - 0.03 && _robot->getYaw() <= right_angle + 0.03)
 	{
 		_robot->setSpeed(0.0, 0.0);
 		cout << "stop rotated!" << endl;
@@ -104,25 +104,25 @@ bool GoRotate::stopCond()
 
 void GoRotate::action()
 {
-	if	(_robot -> GetCurentYaw()> 0 && right_angle > 0 && right_angle >_robot -> GetCurentYaw())
+	if	(_robot -> getYaw()> 0 && right_angle > 0 && right_angle >_robot -> getYaw())
 	{
 		_robot->setSpeed(0.0f, 0.12f);
 	}
-	else if	(_robot -> GetCurentYaw()> 0 && right_angle > 0 && right_angle <_robot -> GetCurentYaw())
+	else if	(_robot -> getYaw()> 0 && right_angle > 0 && right_angle <_robot -> getYaw())
 	{
 		_robot->setSpeed(0.0f, -0.12f);
 	}
-	else if	(_robot -> GetCurentYaw()< 0 && right_angle < 0 && right_angle >_robot -> GetCurentYaw())
+	else if	(_robot -> getYaw()< 0 && right_angle < 0 && right_angle >_robot -> getYaw())
 	{
 		_robot->setSpeed(0.0f, 0.12f);
 	}
-	else if	(_robot -> GetCurentYaw()< 0 && right_angle <0 && right_angle <_robot -> GetCurentYaw())
+	else if	(_robot -> getYaw()< 0 && right_angle <0 && right_angle <_robot -> getYaw())
 	{
 		_robot->setSpeed(0.0f, -0.12f);
 	}
 	else
 	{
-		double a = _robot->GetCurentYaw();
+		double a = _robot->getYaw();
 		double b = right_angle;
 
 		double sum_for_right_dir;

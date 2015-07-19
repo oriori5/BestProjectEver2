@@ -28,7 +28,7 @@ bool GoForward::startCond()
 // Action!
 void GoForward::action()
 {
-	_robot->setSpeed(0.35f,0.0f);
+	_robot->setSpeed(0.25f,0.0f);
 }
 
 // Stop Condition
@@ -37,8 +37,10 @@ bool GoForward::stopCond()
 	// Get the target location of the robot
 	Location loc = _robot->getTargetLocation();
 
-	cout << "Forward, current loc = (" << _robot->getCurrentLocation().getX() << "," << _robot->getCurrentLocation().getY() << ")" << endl;
-	cout << "Forward, target loc = (" << loc.getX() << "," << loc.getY() << ")" << endl;
+	cout << "Forward, current yaw = " << _robot->GetCurentYaw() << endl;
+	cout << "Forward, get yaw = " << _robot->getYaw() << endl;
+	cout << "Forward, current loc = (" << _robot->getCurrentLocation().getX() << "," << _robot->getCurrentLocation().getY() << ") / (" << (_robot->getCurrentLocation().getX() / 2.5) << "," << (_robot->getCurrentLocation().getY() / 2.5) << ")" << endl;
+	cout << "Forward, target loc = (" << loc.getX() << "," << loc.getY() << ") / (" << (loc.getX() / 2.5) << "," << (loc.getY() / 2.5) << ")" << endl;
 	cout << "Forward, distance from target: " << _robot->getCurrentLocation().Distance(loc) << endl;
 
 	// If the distance is less then 30..

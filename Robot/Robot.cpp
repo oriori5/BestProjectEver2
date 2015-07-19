@@ -14,12 +14,25 @@ Robot::Robot(char* ip, int port, Map map)
 	_lp = new LaserProxy(_pc);
 	_map = map;
 
-	_pp->SetOdometry(2.175, -2.875, 0.35);
+	//_pp->SetOdometry(9.05, 7.625, 0.35); // For real robot
+
+	for (int i = 0; i < 20; ++i)
+	{
+		_pp->SetOdometry(9.05, 7.625, 0.35);
+		_pc->Read();
+		cout << "current x = " << _pp->GetXPos() << ", current y = " << _pp->GetYPos() << ", current yaw = " << _pp->GetYaw() << endl;
+	}
+	/*while (_pp->GetXPos() != 9.05 || _pp->GetYPos() != 7.625 || _pp->GetYaw() != 0.35)
+	{
+		_pp->SetOdometry(9.05, 7.625, 0.35);
+	}*/
+	//_pp->SetOdometry(2.175, -2.875, 0.35); // For simulation robot
+
 	//Bug in player
-	for(int i=0;i<15;i++)
+	/*for(int i=0;i<15;i++)
 	{
 		_pc->Read();
-	}
+	}*/
 
 	//double x = _pp->GetXPos();
 	//double y = _pp->GetYPos();

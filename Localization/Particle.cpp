@@ -30,7 +30,30 @@ Particle::~Particle()
 void Particle::Update(int x, int y, float yaw, LaserProxy* _lp, Map& mp)
 {
 	_extendedLocation.SetLocation((_extendedLocation.GetLocation().getX() + x), (_extendedLocation.GetLocation().getY() + y));
-	_extendedLocation.setYaw(fmod((_extendedLocation.getYaw() + yaw), M_PI*2));
+	/*float newYaw;
+
+	if ((_extendedLocation.getYaw() + yaw) >= (2 * M_PI))
+	{
+		newYaw = fmod(_extendedLocation.getYaw() + yaw,  2 * M_PI);
+	}
+	else
+	{
+		newYaw = _extendedLocation.getYaw() + yaw;
+	}*/
+
+
+	/*if ((_extendedLocation.getYaw() + yaw) <= M_PI)
+	{
+		newYaw = _extendedLocation.getYaw() + yaw;
+	}
+	else if ((_extendedLocation.getYaw() + yaw) > M_PI)
+	{
+		float delta = fmod(_extendedLocation.getYaw() + yaw, M_PI);
+
+		newYaw = -M_PI + delta;
+	}*/
+	_extendedLocation.setYaw(fmod(_extendedLocation.getYaw() + yaw,  2 * M_PI));
+	//_extendedLocation.setYaw(fmod((_extendedLocation.getYaw() + yaw), M_PI*2));
 	_belief *= calcMove(x, y, yaw)* calcScan(_lp, mp) * 1.05;
 }
 
@@ -102,10 +125,12 @@ double Particle::calcScan(LaserProxy* _lp, Map& mp)
 			if (mp.GetMapCellByRealLocation(currX / 100.0f,currY / 100.0f) == 1 ||
 				mp.GetMapCellByRealLocation(currX / 100.0f,currY / 100.0f) == 2)
 			{
+				//not_calls++;
 				calls++;
 			}
 			else
 			{
+				//calls++;
 				not_calls++;
 			}
 		}
